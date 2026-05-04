@@ -20,7 +20,7 @@
 <div class="container">
   <h1>Konsultasi AI</h1>
 
-  <textarea id="input" placeholder="Contoh: demam, batuk, sesak..."></textarea>
+  <textarea id="input" placeholder="Contoh: demam tinggi, batuk, sesak nafas..."></textarea>
 
   <button id="btn" class="btn">Analisa</button>
 
@@ -46,29 +46,68 @@ document.getElementById("btn").onclick = function () {
   hasil.innerHTML = "🤖 AI sedang menganalisa...";
 
   setTimeout(function () {
-    if (text.indexOf("sesak") !== -1 || text.indexOf("pingsan") !== -1) {
+
+    // 🔴 LEVEL 3 (DARURAT)
+    if (
+      text.includes("sesak") ||
+      text.includes("pingsan") ||
+      text.includes("tidak sadar") ||
+      text.includes("kejang") ||
+      text.includes("nyeri dada hebat")
+    ) {
       hasil.innerHTML =
         "🚨 <b>LEVEL 3 (DARURAT)</b><br><br>" +
+        "Kemungkinan kondisi serius.<br><br>" +
         "• Segera ke rumah sakit<br>" +
         "• Hubungi 119<br>" +
-        "• Pastikan pasien tetap sadar<br>" +
-        "• Longgarkan pakaian<br>";
-    } 
-    else if (text.indexOf("demam") !== -1 || text.indexOf("batuk") !== -1) {
-      hasil.innerHTML =
-        "🟡 <b>LEVEL 1 (RINGAN)</b><br><br>" +
-        "• Istirahat cukup<br>" +
-        "• Minum air hangat<br>" +
-        "• Bisa minum paracetamol<br>" +
-        "• Jika 3 hari tidak membaik → ke dokter";
-    } 
-    else {
+        "• Jangan ditunda<br>" +
+        "• Pastikan pasien bernapas<br>";
+    }
+
+    // 🟠 LEVEL 2 (MENENGAH)
+    else if (
+      text.includes("demam tinggi") ||
+      text.includes("muntah terus") ||
+      text.includes("diare parah") ||
+      text.includes("sakit perut hebat") ||
+      text.includes("pusing berat")
+    ) {
       hasil.innerHTML =
         "🟠 <b>LEVEL 2 (MENENGAH)</b><br><br>" +
-        "• Disarankan ke dokter<br>" +
-        "• Hindari aktivitas berat<br>" +
-        "• Pantau kondisi tubuh<br>";
+        "Perlu penanganan medis.<br><br>" +
+        "• Segera periksa ke dokter<br>" +
+        "• Minum air cukup<br>" +
+        "• Istirahat total<br>";
     }
+
+    // 🟡 LEVEL 1 (RINGAN)
+    else if (
+      text.includes("demam") ||
+      text.includes("batuk") ||
+      text.includes("pilek") ||
+      text.includes("flu") ||
+      text.includes("masuk angin")
+    ) {
+      hasil.innerHTML =
+        "🟡 <b>LEVEL 1 (RINGAN)</b><br><br>" +
+        "Masih bisa dirawat di rumah.<br><br>" +
+        "• Istirahat cukup<br>" +
+        "• Minum air hangat<br>" +
+        "• Konsumsi obat ringan<br>" +
+        "• Jika >3 hari tidak sembuh → ke dokter";
+    }
+
+    // ❓ TIDAK TERDETEKSI
+    else {
+      hasil.innerHTML =
+        "⚠️ Keluhan belum dikenali.<br><br>" +
+        "Coba tulis lebih detail.<br><br>" +
+        "Contoh:<br>" +
+        "• demam tinggi 3 hari<br>" +
+        "• sesak napas<br>" +
+        "• sakit perut hebat";
+    }
+
   }, 1500);
 };
 </script>
