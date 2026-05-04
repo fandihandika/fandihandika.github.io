@@ -23,8 +23,8 @@
 
 <script>
 function analisa(){
-  let text = document.getElementById("input").value.toLowerCase();
-  let hasil = document.getElementById("hasil");
+  var text = document.getElementById("input").value.toLowerCase();
+  var hasil = document.getElementById("hasil");
 
   if(!text){
     hasil.innerHTML = "⚠️ Isi keluhan dulu";
@@ -32,16 +32,16 @@ function analisa(){
   }
 
   hasil.innerHTML = "🤖 AI sedang menganalisa...";
-  
-  setTimeout(() => {
-    if(text.includes("sesak") || text.includes("pingsan")){
-      hasil.innerHTML = "🚨 <b>LEVEL 3 (DARURAT)</b><br>Segera ke rumah sakit atau hubungi 119.";
+
+  setTimeout(function(){
+    if(text.indexOf("sesak") !== -1 || text.indexOf("pingsan") !== -1){
+      hasil.innerHTML = "🚨 LEVEL 3 (DARURAT)<br>Segera ke rumah sakit atau hubungi 119.";
     }
-    else if(text.includes("demam") || text.includes("batuk")){
-      hasil.innerHTML = "🟡 <b>LEVEL 1 (RINGAN)</b><br>Istirahat, minum air, dan obat ringan.";
+    else if(text.indexOf("demam") !== -1 || text.indexOf("batuk") !== -1){
+      hasil.innerHTML = "🟡 LEVEL 1 (RINGAN)<br>Istirahat dan minum obat ringan.";
     }
     else{
-      hasil.innerHTML = "🟠 <b>LEVEL 2 (MENENGAH)</b><br>Disarankan konsultasi ke dokter.";
+      hasil.innerHTML = "🟠 LEVEL 2 (MENENGAH)<br>Disarankan ke dokter.";
     }
   }, 1500);
 }
