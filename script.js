@@ -1,92 +1,19 @@
-function analisaKeluhan() {
-document.getElementById("loading").style.display = "block";
-document.getElementById("hasil").innerHTML = "";
+function analisa() {
+  const keluhan = document.getElementById("keluhan").value.toLowerCase();
+  const hasil = document.getElementById("hasil");
 
-  
-  const input = document.getElementById("keluhan").value.toLowerCase();
-  let hasil = "";
-
-  if (input.includes("demam") || input.includes("panas")) {
-    hasil = `
-    <h3>🩺 Kemungkinan: Demam / Infeksi Ringan</h3>
-
-    <h4>🏠 Penanganan di Rumah</h4>
-    <ul>
-      <li>Istirahat cukup</li>
-      <li>Perbanyak minum air putih</li>
-      <li>Kompres hangat</li>
-    </ul>
-
-    <h4>💊 Obat Umum</h4>
-    <ul>
-      <li>Paracetamol</li>
-      <li>Ibuprofen (jika perlu)</li>
-    </ul>
-
-    <h4>🌿 Herbal</h4>
-    <ul>
-      <li>Jahe hangat</li>
-      <li>Temulawak</li>
-      <li>Madu</li>
-    </ul>
-    `;
+  if (!keluhan) {
+    hasil.innerHTML = "⚠️ Silakan isi keluhan dulu";
+    return;
   }
 
-  else if (input.includes("batuk") || input.includes("pilek")) {
-    hasil = `
-    <h3>🩺 Kemungkinan: ISPA Ringan</h3>
-
-    <h4>🏠 Penanganan di Rumah</h4>
-    <ul>
-      <li>Minum air hangat</li>
-      <li>Hindari asap rokok</li>
-      <li>Istirahat cukup</li>
-    </ul>
-
-    <h4>💊 Obat Umum</h4>
-    <ul>
-      <li>OBH</li>
-      <li>Antihistamin</li>
-    </ul>
-
-    <h4>🌿 Herbal</h4>
-    <ul>
-      <li>Jeruk nipis + madu</li>
-      <li>Jahe</li>
-    </ul>
-    `;
-  }
-
-  else if (
-    input.includes("nyeri dada") ||
-    input.includes("sesak") ||
-    input.includes("pingsan")
-  ) {
-    hasil = `
-    <h3 style="color:red;">🚨 DARURAT MEDIS</h3>
-
-    <p>Gejala mengarah ke kondisi serius.</p>
-
-    <h4>⚠️ TINDAKAN SEGERA</h4>
-    <ul>
-      <li>Hentikan aktivitas</li>
-      <li>Posisi setengah duduk</li>
-      <li>Segera cari bantuan medis</li>
-    </ul>
-
-    <a href="tel:119" class="darurat">📞 Hubungi 119 Sekarang</a>
-    `;
-  }
-
+  if (keluhan.includes("sesak") || keluhan.includes("pingsan")) {
+    hasil.innerHTML = "🚨 LEVEL 3 (DARURAT)<br>Segera ke rumah sakit atau hubungi 119!";
+  } 
+  else if (keluhan.includes("demam") || keluhan.includes("batuk")) {
+    hasil.innerHTML = "🟡 LEVEL 1 (RINGAN)<br>Istirahat, minum air, bisa konsumsi obat ringan.";
+  } 
   else {
-    hasil = `
-    <h3>🤔 Gejala tidak dikenali</h3>
-    <p>Coba jelaskan lebih detail (contoh: demam + batuk + pusing).</p>
-    `;
+    hasil.innerHTML = "🟠 LEVEL 2 (MENENGAH)<br>Sebaiknya periksa ke dokter.";
   }
-
-  setTimeout(() => {
-  document.getElementById("loading").style.display = "none";
-  document.getElementById("hasil").innerHTML =
-    `<div class="hasil-card">${hasil}</div>`;
-}, 1200);
+}
