@@ -13,8 +13,133 @@
   <h1>Konsultasi AI</h1>
   <p id="user"></p>
 
-  <textarea id="input" placeholder="Tulis keluhan: demam tinggi 3 hari, sesak napas..."></textarea>
+  <textarea id="input" placeholder="Contoh: demam tinggi 3 hari, batuk pilek, sesak napas..."></textarea>
 
   <button id="btn" class="btn">Analisa AI</button>
 
- 
+  <div id="hasil"></div>
+
+  <br>
+  <a href="tel:119" class="btn" style="background:red;color:white;">🚨 Ambulans</a>
+
+  <br>
+  <button onclick="getLocation()" class="btn">📍 RS Terdekat</button>
+
+  <br><br>
+  <a href="index.html">⬅ Kembali</a>
+</div>
+
+<script>
+// tampilkan user
+let user = JSON.parse(localStorage.getItem("user"));
+if(user){
+  document.getElementById("user").innerText = "User: " + user.nama;
+}
+
+// GPS
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      let lat = pos.coords.latitude;
+      let lon = pos.coords.longitude;
+
+      window.open(
+        "https://www.google.com/maps/search/rumah+sakit/@" + lat + "," + lon,
+        "_blank"
+      );
+    });
+  }
+}
+
+// AI pintar (tanpa API)
+document.getElementById("btn").onclick = function () {
+  let text = document.getElementById("input").value.toLowerCase();
+  let hasil = document.getElementById("hasil");
+
+  if (!text) {
+    hasil.innerHTML = "⚠️ Isi keluhan dulu";
+    return;
+  }
+
+  hasil.innerHTML = "🤖 AI sedang menganalisa...";
+
+  setTimeout(function () {
+
+    let res = "";
+
+    // 🔴 DARURAT
+    if (
+      text.includes("sesak") ||
+      text.includes("pingsan") ||
+      text.includes("kejang") ||
+      text.includes("nyeri dada")
+    ) {
+      res = `
+      🚨 <b>LEVEL 3 (DARURAT)</b><br><br>
+      <b>Kemungkinan:</b> Gangguan pernapasan / jantung<br><br>
+      <b>Pertolongan pertama:</b><br>
+      • Baringkan pasien<br>
+      • Longgarkan pakaian<br>
+      • Pastikan napas lancar<br>
+      • Jangan beri makan/minum<br>
+      • Segera hubungi 119<br>
+      `;
+    }
+
+    // 🟠 MENENGAH
+    else if (
+      text.includes("demam tinggi") ||
+      text.includes("muntah") ||
+      text.includes("diare") ||
+      text.includes("sakit perut")
+    ) {
+      res = `
+      🟠 <b>LEVEL 2 (MENENGAH)</b><br><br>
+      <b>Kemungkinan:</b> Infeksi / gangguan pencernaan<br><br>
+      <b>Penanganan:</b><br>
+      • Minum air banyak<br>
+      • Oralit jika diare<br>
+      • Istirahat total<br>
+      • Hindari makanan pedas<br>
+      • Periksa ke dokter<br>
+      `;
+    }
+
+    // 🟡 RINGAN
+    else if (
+      text.includes("demam") ||
+      text.includes("batuk") ||
+      text.includes("pilek") ||
+      text.includes("flu")
+    ) {
+      res = `
+      🟡 <b>LEVEL 1 (RINGAN)</b><br><br>
+      <b>Kemungkinan:</b> Flu / infeksi ringan<br><br>
+      <b>Penanganan:</b><br>
+      • Istirahat cukup<br>
+      • Minum air hangat<br>
+      • Konsumsi paracetamol<br>
+      • Madu + jahe (herbal)<br>
+      • Jika >3 hari → ke dokter<br>
+      `;
+    }
+
+    // ❓ TIDAK DIKENALI
+    else {
+      res = `
+      ⚠️ <b>Belum dikenali</b><br><br>
+      Coba jelaskan lebih detail:<br>
+      • lokasi sakit<br>
+      • berapa lama<br>
+      • gejala tambahan<br>
+      `;
+    }
+
+    hasil.innerHTML = res;
+
+  }, 1200);
+};
+</script>
+
+</body>
+</html>
