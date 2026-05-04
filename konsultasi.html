@@ -9,7 +9,6 @@
 
 <body>
 
-<!-- BACKGROUND ANIMASI -->
 <div class="bg">
   <span style="left:10%; animation-delay:0s;"></span>
   <span style="left:30%; animation-delay:2s;"></span>
@@ -27,6 +26,10 @@
 
   <div id="hasil"></div>
 
+  <br>
+  <a href="tel:119" class="btn" style="background:red; color:white;">🚨 DARURAT</a>
+
+  <br><br>
   <a href="index.html">⬅ Kembali</a>
 </div>
 
@@ -44,13 +47,27 @@ document.getElementById("btn").onclick = function () {
 
   setTimeout(function () {
     if (text.indexOf("sesak") !== -1 || text.indexOf("pingsan") !== -1) {
-      hasil.innerHTML = "🚨 LEVEL 3 (DARURAT)<br>Segera ke rumah sakit atau hubungi 119.";
+      hasil.innerHTML =
+        "🚨 <b>LEVEL 3 (DARURAT)</b><br><br>" +
+        "• Segera ke rumah sakit<br>" +
+        "• Hubungi 119<br>" +
+        "• Pastikan pasien tetap sadar<br>" +
+        "• Longgarkan pakaian<br>";
     } 
     else if (text.indexOf("demam") !== -1 || text.indexOf("batuk") !== -1) {
-      hasil.innerHTML = "🟡 LEVEL 1 (RINGAN)<br>Istirahat dan minum obat ringan.";
+      hasil.innerHTML =
+        "🟡 <b>LEVEL 1 (RINGAN)</b><br><br>" +
+        "• Istirahat cukup<br>" +
+        "• Minum air hangat<br>" +
+        "• Bisa minum paracetamol<br>" +
+        "• Jika 3 hari tidak membaik → ke dokter";
     } 
     else {
-      hasil.innerHTML = "🟠 LEVEL 2 (MENENGAH)<br>Disarankan ke dokter.";
+      hasil.innerHTML =
+        "🟠 <b>LEVEL 2 (MENENGAH)</b><br><br>" +
+        "• Disarankan ke dokter<br>" +
+        "• Hindari aktivitas berat<br>" +
+        "• Pantau kondisi tubuh<br>";
     }
   }, 1500);
 };
