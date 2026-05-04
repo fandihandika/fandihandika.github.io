@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Login H+Medical</h1>
+
+  <input type="text" id="nama" placeholder="Nama" class="btn">
+  <input type="number" id="hp" placeholder="Nomor HP" class="btn">
+
+  <button onclick="login()" class="btn">Masuk</button>
+</div>
+
+<script>
+function login(){
+  let nama = document.getElementById("nama").value;
+  let hp = document.getElementById("hp").value;
+
+  if(!nama || !hp){
+    alert("Isi data dulu");
+    return;
+  }
+
+  localStorage.setItem("user", JSON.stringify({nama, hp}));
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
