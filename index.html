@@ -1,48 +1,88 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>H+ Medical</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H+ Medical</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #0ea5e9;
-      color: white;
-      text-align: center;
-      padding: 50px;
-    }
-    textarea {
-      width: 90%;
-      height: 120px;
-      margin-top: 20px;
-    }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: white;
-      border: none;
-      border-radius: 5px;
-    }
-  </style>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  max-width: 400px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  color: black;
+  font-weight: bold;
+}
+
+#hasil {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.2);
+  padding: 10px;
+  border-radius: 10px;
+}
+</style>
+
 </head>
 <body>
 
-<h1>H+ Medical</h1>
-<p>Konsultasi kesehatan berbasis AI</p>
+<div class="container">
+  <h1>H+ Medical</h1>
+  <p>Konsultasi kesehatan berbasis AI</p>
 
-<textarea placeholder="Tulis keluhan kamu..."></textarea>
-<br>
-<button onclick="analisa()">Analisa</button>
+  <textarea id="input" placeholder="Contoh: demam, batuk, sesak nafas..."></textarea>
 
-<p id="hasil"></p>
+  <button onclick="analisa()">Analisa</button>
+
+  <div id="hasil"></div>
+</div>
 
 <script>
 function analisa(){
-  document.getElementById("hasil").innerText =
-  "🤖 AI: Ini hanya simulasi. Untuk keluhan serius segera ke dokter.";
+  let input = document.getElementById("input").value.toLowerCase();
+  let hasil = document.getElementById("hasil");
+
+  if(input.includes("sesak") || input.includes("pingsan") || input.includes("darah")){
+    hasil.innerHTML = "🚨 Level 3 (DARURAT)<br>Segera ke rumah sakit atau hubungi ambulans!";
+  }
+  else if(input.includes("demam tinggi") || input.includes("nyeri")){
+    hasil.innerHTML = "⚠️ Level 2 (MENENGAH)<br>Disarankan periksa ke dokter.";
+  }
+  else if(input.includes("batuk") || input.includes("pilek") || input.includes("demam")){
+    hasil.innerHTML = "✅ Level 1 (RINGAN)<br>Istirahat, minum obat ringan atau herbal.";
+  }
+  else{
+    hasil.innerHTML = "🤖 AI sedang menganalisa...<br>Silakan jelaskan lebih detail.";
+  }
 }
 </script>
 
