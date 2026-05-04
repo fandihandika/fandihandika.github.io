@@ -27,7 +27,6 @@ textarea {
   border: none;
   padding: 12px;
   font-size: 14px;
-  outline: none;
 }
 
 .btn {
@@ -41,7 +40,6 @@ textarea {
   text-decoration: none;
   border: none;
   font-weight: bold;
-  cursor: pointer;
 }
 
 #hasil {
@@ -49,10 +47,9 @@ textarea {
   background: rgba(255,255,255,0.2);
   padding: 15px;
   border-radius: 12px;
-  min-height: 50px;
 }
 
-/* 🔥 ANIMASI BACKGROUND */
+/* ANIMASI */
 .bg {
   position: fixed;
   top: 0;
