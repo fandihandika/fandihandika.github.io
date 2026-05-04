@@ -1,42 +1,25 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Konsultasi</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div class="container">
-  <h1>Konsultasi AI</h1>
-
-  <textarea id="input" placeholder="Contoh: demam, batuk, sesak..."></textarea>
-
-  <button onclick="analisa()" class="btn">Analisa</button>
-
-  <div id="hasil"></div>
-
-  <a href="index.html">⬅ Kembali</a>
-</div>
-
 <script>
 function analisa(){
   let text = document.getElementById("input").value.toLowerCase();
   let hasil = document.getElementById("hasil");
 
-  if(text.includes("sesak") || text.includes("pingsan")){
-    hasil.innerHTML = "🚨 LEVEL 3 (DARURAT)<br>Segera ke rumah sakit / hubungi 119";
+  if(!text){
+    hasil.innerHTML = "⚠️ Isi keluhan dulu";
+    return;
   }
-  else if(text.includes("demam") || text.includes("batuk")){
-    hasil.innerHTML = "🟡 LEVEL 1 (RINGAN)<br>Istirahat dan minum obat ringan";
-  }
-  else{
-    hasil.innerHTML = "🟠 LEVEL 2 (MENENGAH)<br>Disarankan ke dokter";
-  }
+
+  hasil.innerHTML = "🤖 AI sedang menganalisa...";
+  
+  setTimeout(() => {
+    if(text.includes("sesak") || text.includes("pingsan")){
+      hasil.innerHTML = "🚨 <b>LEVEL 3 (DARURAT)</b><br>Segera ke rumah sakit atau hubungi 119.";
+    }
+    else if(text.includes("demam") || text.includes("batuk")){
+      hasil.innerHTML = "🟡 <b>LEVEL 1 (RINGAN)</b><br>Istirahat, minum air, dan obat ringan.";
+    }
+    else{
+      hasil.innerHTML = "🟠 <b>LEVEL 2 (MENENGAH)</b><br>Disarankan konsultasi ke dokter.";
+    }
+  }, 1500);
 }
 </script>
-
-</body>
-</html>
