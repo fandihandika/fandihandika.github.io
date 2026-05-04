@@ -14,7 +14,7 @@
 
   <textarea id="input" placeholder="Contoh: demam, batuk, sesak..."></textarea>
 
-  <button onclick="analisa()" class="btn">Analisa</button>
+  <button id="btn" class="btn">Analisa</button>
 
   <div id="hasil"></div>
 
@@ -22,27 +22,35 @@
 </div>
 
 <script>
-function analisa(){
-  var text = document.getElementById("input").value.toLowerCase();
-  var hasil = document.getElementById("hasil");
+document.getElementById("btn").onclick = function () {
+  try {
+    var text = document.getElementById("input").value.toLowerCase();
+    var hasil = document.getElementById("hasil");
 
-  if(!text){
-    hasil.innerHTML = "⚠️ Isi keluhan dulu";
-    return;
+    if (!text) {
+      hasil.innerHTML = "⚠️ Isi keluhan dulu";
+      return;
+    }
+
+    hasil.innerHTML = "🤖 AI sedang menganalisa...";
+
+    setTimeout(function () {
+      if (text.indexOf("sesak") !== -1 || text.indexOf("pingsan") !== -1) {
+        hasil.innerHTML = "🚨 LEVEL 3 (DARURAT)<br>Segera ke rumah sakit atau hubungi 119.";
+      } 
+      else if (text.indexOf("demam") !== -1 || text.indexOf("batuk") !== -1) {
+        hasil.innerHTML = "🟡 LEVEL 1 (RINGAN)<br>Istirahat dan minum obat ringan.";
+      } 
+      else {
+        hasil.innerHTML = "🟠 LEVEL 2 (MENENGAH)<br>Disarankan ke dokter.";
+      }
+    }, 1500);
+
+  } catch (e) {
+    document.getElementById("hasil").innerHTML = "❌ Terjadi error: " + e;
   }
-
-  hasil.innerHTML = "🤖 AI sedang menganalisa...";
-
-  setTimeout(function(){
-    if(text.indexOf("sesak") !== -1 || text.indexOf("pingsan") !== -1){
-      hasil.innerHTML = "🚨 LEVEL 3 (DARURAT)<br>Segera ke rumah sakit atau hubungi 119.";
-    }
-    else if(text.indexOf("demam") !== -1 || text.indexOf("batuk") !== -1){
-      hasil.innerHTML = "🟡 LEVEL 1 (RINGAN)<br>Istirahat dan minum obat ringan.";
-    }
-    else{
-      hasil.innerHTML = "🟠 LEVEL 2 (MENENGAH)<br>Disarankan ke dokter.";
-    }
-  }, 1500);
-}
+};
 </script>
+
+</body>
+</html>
