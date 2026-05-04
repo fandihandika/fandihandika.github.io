@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>H+ Medical</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0ea5e9;
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    textarea {
+      width: 90%;
+      height: 120px;
+      margin-top: 20px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>H+ Medical</h1>
+<p>Konsultasi kesehatan berbasis AI</p>
+
+<textarea placeholder="Tulis keluhan kamu..."></textarea>
+<br>
+<button onclick="analisa()">Analisa</button>
+
+<p id="hasil"></p>
+
+<script>
+function analisa(){
+  document.getElementById("hasil").innerText =
+  "🤖 AI: Ini hanya simulasi. Untuk keluhan serius segera ke dokter.";
+}
+</script>
+
+</body>
+</html>
