@@ -5,26 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Konsultasi</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .card {
+      background: rgba(255,255,255,0.15);
+      padding: 15px;
+      border-radius: 15px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .history {
+      margin-top: 30px;
+      text-align: left;
+      font-size: 13px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .history div {
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 8px;
+      padding: 8px;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="bg">
-  <span style="left:10%; animation-delay:0s;"></span>
-  <span style="left:30%; animation-delay:2s;"></span>
-  <span style="left:50%; animation-delay:4s;"></span>
-  <span style="left:70%; animation-delay:1s;"></span>
-  <span style="left:90%; animation-delay:3s;"></span>
+  <span style="left:10%"></span>
+  <span style="left:30%"></span>
+  <span style="left:50%"></span>
+  <span style="left:70%"></span>
+  <span style="left:90%"></span>
 </div>
 
 <div class="container">
   <h1>Konsultasi AI</h1>
 
-  <textarea id="input" placeholder="Contoh: demam tinggi, batuk, sesak nafas..."></textarea>
+  <textarea id="input" placeholder="Contoh: demam tinggi, sakit perut, sesak..."></textarea>
 
   <button id="btn" class="btn">Analisa</button>
 
   <div id="hasil"></div>
+
+  <div class="history" id="history">
+    <h3>Riwayat Konsultasi</h3>
+  </div>
 
   <br>
   <a href="tel:119" class="btn" style="background:red; color:white;">🚨 DARURAT</a>
@@ -34,6 +63,23 @@
 </div>
 
 <script>
+function saveHistory(text, result){
+  let data = JSON.parse(localStorage.getItem("riwayat")) || [];
+  data.unshift({text, result});
+  localStorage.setItem("riwayat", JSON.stringify(data));
+  loadHistory();
+}
+
+function loadHistory(){
+  let data = JSON.parse(localStorage.getItem("riwayat")) || [];
+  let historyDiv = document.getElementById("history");
+  historyDiv.innerHTML = "<h3>Riwayat Konsultasi</h3>";
+
+  data.slice(0,5).forEach(item => {
+    historyDiv.innerHTML += "<div>📝 " + item.text + "<br>" + item.result + "</div>";
+  });
+}
+
 document.getElementById("btn").onclick = function () {
   var text = document.getElementById("input").value.toLowerCase();
   var hasil = document.getElementById("hasil");
@@ -46,70 +92,63 @@ document.getElementById("btn").onclick = function () {
   hasil.innerHTML = "🤖 AI sedang menganalisa...";
 
   setTimeout(function () {
+    var result = "";
 
-    // 🔴 LEVEL 3 (DARURAT)
+    // LEVEL 3
     if (
       text.includes("sesak") ||
       text.includes("pingsan") ||
-      text.includes("tidak sadar") ||
       text.includes("kejang") ||
-      text.includes("nyeri dada hebat")
+      text.includes("nyeri dada")
     ) {
-      hasil.innerHTML =
-        "🚨 <b>LEVEL 3 (DARURAT)</b><br><br>" +
-        "Kemungkinan kondisi serius.<br><br>" +
-        "• Segera ke rumah sakit<br>" +
-        "• Hubungi 119<br>" +
-        "• Jangan ditunda<br>" +
-        "• Pastikan pasien bernapas<br>";
+      result =
+      "🚨 <b>LEVEL 3 (DARURAT)</b><br><br>" +
+      "• Segera ke rumah sakit<br>" +
+      "• Hubungi 119<br>" +
+      "• Jangan ditunda<br>";
     }
 
-    // 🟠 LEVEL 2 (MENENGAH)
+    // LEVEL 2
     else if (
       text.includes("demam tinggi") ||
-      text.includes("muntah terus") ||
-      text.includes("diare parah") ||
-      text.includes("sakit perut hebat") ||
+      text.includes("muntah") ||
+      text.includes("diare") ||
+      text.includes("sakit perut") ||
       text.includes("pusing berat")
     ) {
-      hasil.innerHTML =
-        "🟠 <b>LEVEL 2 (MENENGAH)</b><br><br>" +
-        "Perlu penanganan medis.<br><br>" +
-        "• Segera periksa ke dokter<br>" +
-        "• Minum air cukup<br>" +
-        "• Istirahat total<br>";
+      result =
+      "🟠 <b>LEVEL 2 (MENENGAH)</b><br><br>" +
+      "• Periksa ke dokter<br>" +
+      "• Istirahat<br>" +
+      "• Minum cukup<br>";
     }
 
-    // 🟡 LEVEL 1 (RINGAN)
+    // LEVEL 1
     else if (
       text.includes("demam") ||
       text.includes("batuk") ||
       text.includes("pilek") ||
-      text.includes("flu") ||
-      text.includes("masuk angin")
+      text.includes("flu")
     ) {
-      hasil.innerHTML =
-        "🟡 <b>LEVEL 1 (RINGAN)</b><br><br>" +
-        "Masih bisa dirawat di rumah.<br><br>" +
-        "• Istirahat cukup<br>" +
-        "• Minum air hangat<br>" +
-        "• Konsumsi obat ringan<br>" +
-        "• Jika >3 hari tidak sembuh → ke dokter";
+      result =
+      "🟡 <b>LEVEL 1 (RINGAN)</b><br><br>" +
+      "• Istirahat<br>" +
+      "• Minum hangat<br>" +
+      "• Obat ringan<br>";
     }
 
-    // ❓ TIDAK TERDETEKSI
     else {
-      hasil.innerHTML =
-        "⚠️ Keluhan belum dikenali.<br><br>" +
-        "Coba tulis lebih detail.<br><br>" +
-        "Contoh:<br>" +
-        "• demam tinggi 3 hari<br>" +
-        "• sesak napas<br>" +
-        "• sakit perut hebat";
+      result =
+      "⚠️ Tidak dikenali<br>Coba tulis lebih detail";
     }
 
-  }, 1500);
+    hasil.innerHTML = '<div class="card">' + result + '</div>';
+    saveHistory(text, result);
+
+  }, 1200);
 };
+
+loadHistory();
 </script>
 
 </body>
