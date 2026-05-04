@@ -4,30 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tentang - H+Medical</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-<canvas id="bg"></canvas>
 
 <div class="hero">
   <h1>Tentang H+Medical</h1>
-  <p>AI kesehatan untuk edukasi, pertolongan pertama, dan darurat.</p>
-  <div class="buttons">
-    <div class="ads-container">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-3875944678076630"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  <p>
+    H+Medical adalah aplikasi konsultasi kesehatan berbasis AI
+    untuk membantu pertolongan pertama dan edukasi kesehatan.
+  </p>
+
+  <p>
+    Sistem akan membagi kondisi menjadi 3 level:
+    <br>1. Ringan
+    <br>2. Menengah
+    <br>3. Darurat
+  </p>
+
+  <a href="index.html">⬅ Kembali</a>
 </div>
 
-    <a href="index.html">Kembali</a>
-  </div>
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>
