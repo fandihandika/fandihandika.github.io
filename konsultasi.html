@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsultasi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Konsultasi AI</h1>
+
+  <textarea id="input" placeholder="Contoh: demam, batuk, sesak..."></textarea>
+
+  <button onclick="analisa()" class="btn">Analisa</button>
+
+  <div id="hasil"></div>
+
+  <a href="index.html">⬅ Kembali</a>
+</div>
+
 <script>
 function analisa(){
   let text = document.getElementById("input").value.toLowerCase();
