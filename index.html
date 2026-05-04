@@ -1,29 +1,56 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>H+Medical</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H+Medical</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- BACKGROUND ANIMASI -->
-<div class="bg">
-  <span style="left:10%; animation-delay:0s;"></span>
-  <span style="left:30%; animation-delay:2s;"></span>
-  <span style="left:50%; animation-delay:4s;"></span>
-  <span style="left:70%; animation-delay:1s;"></span>
-  <span style="left:90%; animation-delay:3s;"></span>
-</div>
-
 <div class="container">
-  <h1>H+Medical</h1>
-  <p>Konsultasi kesehatan berbasis AI</p>
+  <h1 id="welcome">H+Medical</h1>
 
-  <a href="konsultasi.html" class="btn">Mulai Konsultasi</a>
+  <p>Konsultasi kesehatan AI</p>
+
+  <button onclick="cekLogin()" class="btn">Mulai Konsultasi</button>
+
+  <button onclick="getLocation()" class="btn">📍 Cari RS Terdekat</button>
 </div>
+
+<script>
+function cekLogin(){
+  let user = localStorage.getItem("user");
+
+  if(!user){
+    window.location.href = "login.html";
+  }else{
+    window.location.href = "konsultasi.html";
+  }
+}
+
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      let lat = pos.coords.latitude;
+      let lon = pos.coords.longitude;
+
+      window.open(
+        "https://www.google.com/maps/search/rumah+sakit/@" + lat + "," + lon,
+        "_blank"
+      );
+    });
+  }else{
+    alert("GPS tidak didukung");
+  }
+}
+
+let user = JSON.parse(localStorage.getItem("user"));
+if(user){
+  document.getElementById("welcome").innerText = "Halo, " + user.nama;
+}
+</script>
 
 </body>
 </html>
