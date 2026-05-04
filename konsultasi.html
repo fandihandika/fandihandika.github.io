@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Konsultasi</title>
+<title>Konsultasi AI</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,9 +13,9 @@
   <h1>Konsultasi AI</h1>
   <p id="user"></p>
 
-  <textarea id="input" placeholder="Contoh: demam tinggi, sesak napas..."></textarea>
+  <textarea id="input" placeholder="Tulis keluhan kesehatan kamu..."></textarea>
 
-  <button id="btn" class="btn">Analisa</button>
+  <button id="btn" class="btn">Analisa AI</button>
 
   <div id="hasil"></div>
 
@@ -32,8 +32,55 @@
 <script>
 let user = JSON.parse(localStorage.getItem("user"));
 if(user){
-  document.getElementById("user").innerText = "User: " + user.nama + " (" + user.hp + ")";
+  document.getElementById("user").innerText = "User: " + user.nama;
 }
+
+// 🔥 GANTI API KEY DI SINI
+const API_KEY = "ISI_API_KEY_KAMU";
+
+document.getElementById("btn").onclick = async function () {
+  let text = document.getElementById("input").value;
+  let hasil = document.getElementById("hasil");
+
+  if (!text) {
+    hasil.innerHTML = "⚠️ Isi keluhan dulu";
+    return;
+  }
+
+  hasil.innerHTML = "🤖 AI sedang menganalisa...";
+
+  try {
+    let response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + API_KEY
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "Kamu adalah asisten medis yang memberikan pertolongan pertama sederhana, aman, dan tidak menggantikan dokter."
+          },
+          {
+            role: "user",
+            content: text
+          }
+        ]
+      })
+    });
+
+    let data = await response.json();
+
+    let hasilAI = data.choices[0].message.content;
+
+    hasil.innerHTML = hasilAI;
+
+  } catch (e) {
+    hasil.innerHTML = "❌ Gagal konek AI";
+  }
+};
 
 function getLocation(){
   if(navigator.geolocation){
@@ -48,32 +95,6 @@ function getLocation(){
     });
   }
 }
-
-document.getElementById("btn").onclick = function () {
-  let text = document.getElementById("input").value.toLowerCase();
-  let hasil = document.getElementById("hasil");
-
-  if (!text) {
-    hasil.innerHTML = "⚠️ Isi keluhan dulu";
-    return;
-  }
-
-  hasil.innerHTML = "🤖 AI sedang menganalisa...";
-
-  setTimeout(function () {
-
-    if(text.includes("sesak") || text.includes("pingsan")){
-      hasil.innerHTML = "🚨 DARURAT<br>Segera ke RS & hubungi 119<br>Longgarkan pakaian & bantu napas";
-    }
-    else if(text.includes("demam")){
-      hasil.innerHTML = "🟡 DEMAM<br>Minum air, kompres, paracetamol, istirahat";
-    }
-    else{
-      hasil.innerHTML = "🟠 MENENGAH<br>Istirahat & segera ke dokter";
-    }
-
-  }, 1200);
-};
 </script>
 
 </body>
