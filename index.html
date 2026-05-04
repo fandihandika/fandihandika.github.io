@@ -9,12 +9,49 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fandihandika.github.io/" />
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3875944678076630"
-    crossorigin="anonymous"></script>
-
   <title>H+Medical | Konsultasi Kesehatan AI</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <!-- FIX PATH CSS -->
+  <link rel="stylesheet" href="./style.css"/>
+
+  <!-- FALLBACK STYLE (biar tidak putih kalau CSS gagal) -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      color: white;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+    .darurat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: red;
+      color: white;
+      padding: 12px;
+      border-radius: 50px;
+      text-decoration: none;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -39,18 +76,6 @@
       <a href="tentang.html" class="outline">Tentang</a>
     </div>
   </header>
-<!-- ADSENSE SAFE ZONE -->
-<div class="ads-container">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-3875944678076630"
-       data-ad-slot="auto"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
 
   <!-- TOMBOL DARURAT -->
   <a href="tel:119" class="darurat">🚨 DARURAT</a>
@@ -66,19 +91,20 @@
     <p>© 2025 H+Medical</p>
   </footer>
 
-  <!-- SCRIPT -->
-  <script src="script.js"></script>
+  <!-- SCRIPT FIX -->
+  <script src="./script.js"></script>
 
+  <!-- DISCLAIMER -->
   <footer class="footer">
-  <p>
-    <strong>Medical Disclaimer:</strong><br>
-    H+Medical adalah alat edukasi kesehatan dan pertolongan awal berbasis informasi umum.
-    Bukan pengganti diagnosis, saran, atau perawatan medis profesional.
-  </p>
-  <p>
-    Jika Anda mengalami kondisi serius atau darurat, segera hubungi layanan medis resmi.
-  </p>
-</footer>
+    <p>
+      <strong>Medical Disclaimer:</strong><br>
+      H+Medical adalah alat edukasi kesehatan dan pertolongan awal berbasis informasi umum.
+      Bukan pengganti diagnosis, saran, atau perawatan medis profesional.
+    </p>
+    <p>
+      Jika Anda mengalami kondisi serius atau darurat, segera hubungi layanan medis resmi.
+    </p>
+  </footer>
 
 </body>
 </html>
