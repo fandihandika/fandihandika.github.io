@@ -1,90 +1,84 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>H+ Medical</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0ea5e9, #22c55e);
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
+  <!-- SEO -->
+  <meta name="description" content="H+Medical adalah layanan konsultasi kesehatan berbasis AI untuk membantu diagnosis awal dan penanganan mandiri." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fandihandika.github.io/" />
 
-.container {
-  max-width: 400px;
-  margin: auto;
-}
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3875944678076630"
+    crossorigin="anonymous"></script>
 
-h1 {
-  font-size: 32px;
-}
-
-textarea {
-  width: 100%;
-  height: 120px;
-  border-radius: 10px;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-}
-
-button {
-  margin-top: 15px;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  background: white;
-  color: black;
-  font-weight: bold;
-}
-
-#hasil {
-  margin-top: 20px;
-  background: rgba(255,255,255,0.2);
-  padding: 10px;
-  border-radius: 10px;
-}
-</style>
-
+  <title>H+Medical | Konsultasi Kesehatan AI</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
+
 <body>
 
-<div class="container">
-  <h1>H+ Medical</h1>
-  <p>Konsultasi kesehatan berbasis AI</p>
+  <!-- Background Animasi -->
+  <div class="bg-animasi">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 
-  <textarea id="input" placeholder="Contoh: demam, batuk, sesak nafas..."></textarea>
+  <canvas id="bg"></canvas>
 
-  <button onclick="analisa()">Analisa</button>
-
-  <div id="hasil"></div>
+  <!-- HERO -->
+  <header class="hero">
+    <h1>H+Medical</h1>
+    <p>Konsultasi kesehatan berbasis AI</p>
+    <div class="buttons">
+      <a href="konsultasi.html">Mulai Konsultasi</a>
+      <a href="tentang.html" class="outline">Tentang</a>
+    </div>
+  </header>
+<!-- ADSENSE SAFE ZONE -->
+<div class="ads-container">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-3875944678076630"
+       data-ad-slot="auto"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </div>
 
-<script>
-function analisa(){
-  let input = document.getElementById("input").value.toLowerCase();
-  let hasil = document.getElementById("hasil");
+  <!-- TOMBOL DARURAT -->
+  <a href="tel:119" class="darurat">🚨 DARURAT</a>
 
-  if(input.includes("sesak") || input.includes("pingsan") || input.includes("darah")){
-    hasil.innerHTML = "🚨 Level 3 (DARURAT)<br>Segera ke rumah sakit atau hubungi ambulans!";
-  }
-  else if(input.includes("demam tinggi") || input.includes("nyeri")){
-    hasil.innerHTML = "⚠️ Level 2 (MENENGAH)<br>Disarankan periksa ke dokter.";
-  }
-  else if(input.includes("batuk") || input.includes("pilek") || input.includes("demam")){
-    hasil.innerHTML = "✅ Level 1 (RINGAN)<br>Istirahat, minum obat ringan atau herbal.";
-  }
-  else{
-    hasil.innerHTML = "🤖 AI sedang menganalisa...<br>Silakan jelaskan lebih detail.";
-  }
-}
-</script>
+  <!-- FOOTER -->
+  <footer style="text-align:center; margin-top:40px; font-size:14px;">
+    <hr>
+    <p>
+      <a href="about.html">About</a> |
+      <a href="privacy.html">Privacy Policy</a> |
+      <a href="contact.html">Contact</a>
+    </p>
+    <p>© 2025 H+Medical</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+
+  <footer class="footer">
+  <p>
+    <strong>Medical Disclaimer:</strong><br>
+    H+Medical adalah alat edukasi kesehatan dan pertolongan awal berbasis informasi umum.
+    Bukan pengganti diagnosis, saran, atau perawatan medis profesional.
+  </p>
+  <p>
+    Jika Anda mengalami kondisi serius atau darurat, segera hubungi layanan medis resmi.
+  </p>
+</footer>
 
 </body>
 </html>
